@@ -7,10 +7,13 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 
 // Routes
+import { TodosRoute } from './routes/todos.route';
 
 // Models
+import { TodoModel } from './models/todo.model';
 
 // Schema
+import { TodoSchema } from './schemas/todo.schema';
 
 // Config
 
@@ -28,6 +31,7 @@ export class Server {
   private connection!: mongoose.Connection;
 
   // instances of models
+  private todoModel!: mongoose.Model<TodoModel>; // an instance of todoModel
 
   /**
    * Bootstrap the application
@@ -72,7 +76,7 @@ export class Server {
     const MONGODB_CONNECTION = `mongodb://${ dbaddr }:${ dbport }/${ 'Affable_Todos' }`;
 
     httpLogger.token('post', (req: express.Request, res: express.Response) => {
-        if (req.method === 'POST') {
+        if (req.method === 'POST' || req.method === 'PATCH') {
             req.body['password'] = undefined;
             return JSON.stringify(req.body);
         } else {
@@ -90,6 +94,13 @@ export class Server {
       extended: true
     }));
 
+    this.app.use(function(req, res, next) {
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+      res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+      res.header('Access-Control-Allow-Origin', '*');
+      next();
+    });
+
     // connect to mongoose
 
     require('mongoose').Promise = global.Promise;
@@ -100,6 +111,7 @@ export class Server {
     this.connection = connection;
 
     // create models
+    this.todoModel = connection.model<TodoModel>('Todo', TodoSchema);
 
     // create MongoStore
     const MongoStore = connectMongo(session);
@@ -131,6 +143,7 @@ export class Server {
   public routes = () => {
 
     // API Routes
+    this.app.use('/api/todos', TodosRoute.create(this.todoModel));
 
     // Public Routes
     this.app.use('/', express.static(path.join(__dirname, '../public')));
