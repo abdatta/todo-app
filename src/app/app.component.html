@@ -17,25 +17,25 @@
         <div *ngFor="let item of getItems(); let i=index">
           <mat-list-item *ngIf="edit !== i" cdkDrag class="item-box">
             <div>
-              <mat-checkbox [(ngModel)]="item.completed" (change)="all = false;" [class.completed]="item.completed">{{item.name}}</mat-checkbox>
+              <mat-checkbox [ngModel]="item.completed" (change)="toggleItem(item.i)" [class.completed]="item.completed">{{item.title}}</mat-checkbox>
               <button mat-button mat-icon-button class="edit" (click)="edit=i" matTooltip="Edit">
                   <mat-icon aria-label="Edit">edit</mat-icon>
               </button>
             </div>
             <div style="margin-left: auto">
-              <button mat-button mat-icon-button (click)="delItem(i)" matTooltip="Delete">
+              <button mat-button mat-icon-button (click)="delItem(item.i)" matTooltip="Delete">
                   <mat-icon aria-label="Remove">delete_outline</mat-icon>
               </button>
             </div>
           </mat-list-item>
           <mat-list-item *ngIf="edit === i" cdkDrag class="item-box">
-              <mat-checkbox [(ngModel)]="item.completed" (change)="all = false;"></mat-checkbox>
+              <mat-checkbox [ngModel]="item.completed" (change)="toggleItem(item.i)"></mat-checkbox>
               <mat-form-field>
-                <input matInput #editor [(ngModel)]="item.name" (keyup.enter)="edit=-1" (focusout)="edit=-1">
+                <input matInput #editor [(ngModel)]="item.title" (keyup.enter)="reTitle(item.i)" (focusout)="reTitle(item.i)">
                 {{ editor.focus() }}
               </mat-form-field>
               <div>
-                <button mat-button mat-icon-button (click)="delItem(i)" matTooltip="Delete">
+                <button mat-button mat-icon-button (click)="delItem(item.i)" matTooltip="Delete">
                     <mat-icon aria-label="Remove">delete_outline</mat-icon>
                 </button>
               </div>
@@ -58,7 +58,7 @@
         </mat-list-item>
         <div class="mat-small" *ngIf="items.length > 0">
             <span class="info"><mat-icon>info</mat-icon>{{getItemsLeft().length}} items left</span>
-            <span class="del" (click)="items = getItemsLeft()">Clear Completed</span>
+            <span class="del" (click)="deleteCompleted()">Clear Completed({{getItemsComplete().length}})</span>
         </div>
       </mat-list>
   </mat-card>

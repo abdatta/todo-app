@@ -26,7 +26,9 @@ export class TodosCtrl {
 
     private URLize(todo: TodoModel) {
         const td = JSON.parse(JSON.stringify(todo));
-        td['url'] = 'http://localhost:8000/api/todos/' + todo._id;
+        if (todo) {
+            td['url'] = 'http://localhost:8000/api/todos/' + todo._id;
+        }
         return td;
     }
 
@@ -111,7 +113,7 @@ export class TodosCtrl {
                 if (req.body.order) {
                     todo.order = req.body.order;
                 }
-                if (req.body.completed) {
+                if (req.body.completed !== undefined) {
                     todo.completed = req.body.completed;
                 }
                 todo.save((err: Error, savedTodo: TodoModel) => {

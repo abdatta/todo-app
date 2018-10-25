@@ -4,8 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MaterialModule } from './material.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
+import { TodosService } from './todos.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,12 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     FormsModule,
     DragDropModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    TodosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
