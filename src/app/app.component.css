@@ -1,0 +1,97 @@
+h1 {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.info , .del{
+    display: inline-flex;
+    vertical-align: middle;
+    line-height: 24px;
+}
+
+.info .mat-icon, .del .mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    line-height: inherit;
+    margin: 0 3px;
+}
+
+.del:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mat-small {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+mat-form-field {
+    margin-left: 8px;
+    width: 100%;
+}
+
+mat-card {
+    width: 90%;
+    max-width: 400px;
+    padding: 0;
+}
+
+.edit {
+    display: none;
+    margin-left: 10px;
+}
+
+mat-list-item:hover .edit {
+    display: initial;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.filter > div {
+    justify-content: space-between;
+}
+
+/* For dragging and dropping */
+
+.item-list {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+.item-box {
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+.cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
