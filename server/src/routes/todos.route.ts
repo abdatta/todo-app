@@ -35,10 +35,10 @@ export class TodosRoute {
             .options('/:id', todosCtrl.setOptions)
             .get('/',  todosCtrl.getTodosList)
             .get('/:id', todosCtrl.getTodo)
-            .post('/',  todosCtrl.addTodo)
+            .post('/',  todosCtrl.addTodo, accountCtrl.userAddedTodo)
             .patch('/:id', todosCtrl.updateTodo)
             .delete('/', todosCtrl.deleteTodosList)
-            .delete('/:id', todosCtrl.deleteTodo);
+            .delete('/:id', todosCtrl.deleteTodo, accountCtrl.userDeletedTodo);
 
         return router;
     }

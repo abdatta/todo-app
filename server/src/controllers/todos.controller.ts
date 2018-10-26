@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Model } from 'mongoose';
 
 import { TodoModel } from '../models/todo.model';
+import { NextFunction } from 'connect';
 export class TodosCtrl {
 
     private todoModel: Model<TodoModel>;
@@ -49,7 +50,7 @@ export class TodosCtrl {
      * @class TodosCtrl
      * @method addTodo
      */
-    public addTodo = (req: Request, res: Response) => {
+    public addTodo = (req: Request, res: Response, next: NextFunction) => {
         const todo = new this.todoModel();
         todo.completed = false;
         todo.title = req.body.title;
@@ -63,7 +64,8 @@ export class TodosCtrl {
             if (error) {
                 this.internalServer(res, error);
             } else {
-                res.status(200).json(this.URLize(todo));
+                res.locals.todo = this.URLize(todo);
+                next();
             }
         });
     }
@@ -161,12 +163,12 @@ export class TodosCtrl {
      * @class TodosCtrl
      * @method deleteTodos
      */
-    public deleteTodo = (req: Request, res: Response) => {
+    public deleteTodo = (req: Request, res: Response, next: NextFunction) => {
         this.todoModel.deleteOne({ _id: req.params.id, user: req.user.username}, (error: Error) => {
             if (error) {
                 this.internalServer(res, error);
             } else {
-                res.sendStatus(200);
+                next();
             }
         });
     }
