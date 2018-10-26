@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from './todos.service';
-import { Todo } from './todo.model';
+import { TodosService } from '../todos-service/todos.service';
+import { Todo } from '../todo-model/todo.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-todos',
+  templateUrl: './todos.component.html',
+  styleUrls: ['./todos.component.css']
 })
-export class AppComponent implements OnInit {
+export class TodosComponent implements OnInit {
 
   all = false;
   filter: ('all' | 'active' | 'completed') = 'all';

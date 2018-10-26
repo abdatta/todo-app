@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Todo } from './todo.model';
+import { Todo } from '../todo-model/todo.model';
 
 @Injectable({
   providedIn: 'root'
