@@ -5,6 +5,7 @@ import { Document } from 'mongoose';
  * @interface TodoModel
  */
 export interface TodoModel extends Document {
+    user: string;
     title: string;
     order: number;
     completed: boolean;

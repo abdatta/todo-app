@@ -28,6 +28,7 @@ export class TodosCtrl {
         const td = JSON.parse(JSON.stringify(todo));
         if (todo) {
             td['url'] = 'http://localhost:8000/api/todos/' + todo._id;
+            td['user'] = undefined;
         }
         return td;
     }
@@ -52,6 +53,9 @@ export class TodosCtrl {
         const todo = new this.todoModel();
         todo.completed = false;
         todo.title = req.body.title;
+        if (req.user) {
+            todo.user = req.user.username;
+        }
         if (req.body.order) {
             todo.order = req.body.order;
         }
@@ -71,7 +75,7 @@ export class TodosCtrl {
      * @method getTodosList
      */
     public getTodosList = (req: Request, res: Response) => {
-        this.todoModel.find({}, (error: Error, todos: TodoModel[]) => {
+        this.todoModel.find({user: req.user.username}, (error: Error, todos: TodoModel[]) => {
             if (error) {
                 this.internalServer(res, error);
             } else {
@@ -90,6 +94,10 @@ export class TodosCtrl {
         this.todoModel.findById(req.params.id, (error: Error, todo: TodoModel) => {
             if (error) {
                 this.internalServer(res, error);
+            } else if (!todo) {
+                res.sendStatus(404); // Not found
+            } else if (todo.user !== req.user.username) {
+                res.sendStatus(401); // Unauthorized
             } else {
                 res.status(200).json(this.URLize(todo));
             }
@@ -106,6 +114,10 @@ export class TodosCtrl {
         this.todoModel.findById(req.params.id, (error: Error, todo: TodoModel) => {
             if (error) {
                 this.internalServer(res, error);
+            } else if (!todo) {
+                res.sendStatus(404); // Not found
+            } else if (todo.user !== req.user.username) {
+                res.sendStatus(401); // Unauthorized
             } else {
                 if (req.body.title) {
                     todo.title = req.body.title;
@@ -134,7 +146,7 @@ export class TodosCtrl {
      * @method deleteTodosList
      */
     public deleteTodosList = (req: Request, res: Response) => {
-        this.todoModel.deleteMany({}, (error: Error) => {
+        this.todoModel.deleteMany({user: req.user.username}, (error: Error) => {
             if (error) {
                 this.internalServer(res, error);
             } else {
@@ -150,7 +162,7 @@ export class TodosCtrl {
      * @method deleteTodos
      */
     public deleteTodo = (req: Request, res: Response) => {
-        this.todoModel.deleteOne({ _id: req.params.id}, (error: Error) => {
+        this.todoModel.deleteOne({ _id: req.params.id, user: req.user.username}, (error: Error) => {
             if (error) {
                 this.internalServer(res, error);
             } else {
