@@ -62,5 +62,8 @@
       </mat-list>
   </mat-card>
   <br>
-  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  <div class="tasks">
+    <button mat-raised-button color="warn" *ngIf="isAdmin" routerLink="/stats">See Stats</button>
+    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  </div>
 </div>

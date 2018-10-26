@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { User } from '../user-model/user.model';
+import { Stat } from '../stat-model/stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,11 @@ export class AuthService {
         catchError(this.handleError)
       )
       .subscribe(o => this.router.navigateByUrl('/authenticate'));
+  }
+
+  getStats(): Observable<Stat[]> {
+    return this.http.get<Stat[]>('/api/accounts/stats')
+      .pipe(catchError(this.handleError));
   }
 
   handleError(error: any): Observable<any> {

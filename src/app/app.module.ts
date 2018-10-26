@@ -13,12 +13,14 @@ import { AuthService } from './auth-service/auth.service';
 import { AppComponent } from './app-component/app.component';
 import { AuthComponent } from './auth-component/auth.component';
 import { TodosComponent } from './todos-component/todos.component';
+import { StatsComponent } from './stats-component/stats.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    TodosComponent
+    TodosComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

@@ -46,6 +46,13 @@ mat-card {
     padding: 0;
 }
 
+.tasks {
+    display: flex;
+    width: 90%;
+    max-width: 400px;
+    justify-content: space-around;
+}
+
 .edit {
     display: none;
     margin-left: 10px;

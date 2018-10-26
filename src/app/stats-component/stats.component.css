@@ -1,0 +1,38 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    align-items: center;
+}
+
+table {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+
+ th.mat-column-User {
+    width: 60%;
+ }
+
+ .mat-column-Created {
+    text-align: center;
+ }
+
+ .mat-column-Deleted {
+    text-align: center;
+ }
+
+ .tasks {
+    display: flex;
+    width: 90%;
+    max-width: 400px;
+    justify-content: space-around;
+}

@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatIconModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
   ],
   exports: [
     MatToolbarModule,
@@ -36,7 +38,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatIconModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
   ],
   declarations: []
 })

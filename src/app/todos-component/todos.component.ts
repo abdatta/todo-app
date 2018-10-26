@@ -16,12 +16,15 @@ export class TodosComponent implements OnInit {
 
   items: Todo[] = [];
 
+  isAdmin = false;
+
   constructor(private todosService: TodosService,
               private authService: AuthService) {}
 
   ngOnInit() {
     this.todosService.getAllTodos()
       .subscribe(todos => this.items = todos.sort((a, b) => a.order - b.order));
+    this.authService.getUser().then(user => this.isAdmin = user.username === 'admin');
   }
 
   getItems() {
