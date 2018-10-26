@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../todos-service/todos.service';
 import { Todo } from '../todo-model/todo.model';
+import { AuthService } from '../auth-service/auth.service';
 
 @Component({
   selector: 'app-todos',
@@ -15,7 +16,8 @@ export class TodosComponent implements OnInit {
 
   items: Todo[] = [];
 
-  constructor(private todosService: TodosService) {}
+  constructor(private todosService: TodosService,
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.todosService.getAllTodos()
@@ -109,5 +111,9 @@ export class TodosComponent implements OnInit {
   updateItem(item: Todo) {
     this.todosService.updateOneTodo(item)
       .subscribe(todo => item._id = todo._id);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

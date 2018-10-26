@@ -1,3 +1,37 @@
-<p>
-  auth works!
-</p>
+<h1>Authenticate</h1>
+<div class="container">
+  <mat-card>
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Login" class="tabgroup">
+        <br>
+          <mat-form-field>
+            <input matInput placeholder="Username" #user (keyup.enter)="pass.focus()">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" (keyup.enter)="logIn(user.value, pass.value); pass.blur()" #pass>
+            <mat-hint *ngIf="loginerror" align="start" color="primary"><strong>{{loginerror}}</strong></mat-hint>
+          </mat-form-field>
+          <div class="submit">
+            <button mat-flat-button color="primary" (click)="logIn(user.value, pass.value)">Login</button>
+          </div>
+      </mat-tab>
+      <mat-tab label="Signup" class="tabgroup">
+        <br>
+          <mat-form-field>
+            <input matInput placeholder="Username" #newuser (keyup.enter)="newpass.focus()">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" #newpass (keyup.enter)="newpass2.focus()">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="password" placeholder="Retype Password" #newpass2 (keyup.enter)="signUp(newuser.value, newpass.value, newpass2.value); newpass2.blur()">
+              <mat-hint *ngIf="signuperror" align="start" color="primary"><strong>{{signuperror}}</strong></mat-hint>
+          </mat-form-field>
+          <div class="submit">
+              <button mat-flat-button color="primary" (click)="signUp(newuser.value, newpass.value, newpass2.value)">Signup</button>
+          </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
+

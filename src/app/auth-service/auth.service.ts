@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -12,8 +13,9 @@ export class AuthService {
 
   private currentUser: Promise<User>;
 
-  constructor(private http: HttpClient) {
-    this.currentUser = this.http.get<User>('/server/accounts/auth')
+  constructor(private http: HttpClient,
+              private router: Router) {
+    this.currentUser = this.http.get<User>('/api/accounts/auth')
       .pipe(
         catchError((err: any, caught) => of(null))
       ).toPromise();
@@ -28,32 +30,35 @@ export class AuthService {
   }
 
   logIn(user: string, pass: string): Observable<number> {
-    return this.http.post<User>('/server/accounts/signin', { username: user, password: pass})
+    return this.http.post<User>('/api/accounts/login', { username: user, password: pass})
       .pipe(
         map((response: User) => {
           this.currentUser = Promise.resolve(response);
+          return 200;
         }),
         catchError(this.handleError)
       );
   }
 
-  signUp(name: string, user: string, pass: string): Observable<number> {
-    return this.http.post<User>('/server/accounts/signup', { name: name, username: user, password: pass })
+  signUp(user: string, pass: string): Observable<number> {
+    return this.http.post<User>('/api/accounts/signup', { username: user, password: pass })
       .pipe(
         map((response: User) => {
           this.currentUser = Promise.resolve(response);
+          return 200;
         }),
         catchError(this.handleError)
       );
   }
 
-  logout(): void {
+  logout(): void {console.log('logging out...');
     this.currentUser = Promise.resolve(null);
     // To execute observable, it is converted to a promise
-    this.http.post('/server/accounts/logout', {})
+    this.http.post('/api/accounts/logout', {})
       .pipe(
         catchError(this.handleError)
-      );
+      )
+      .subscribe(o => this.router.navigateByUrl('/authenticate'));
   }
 
   handleError(error: any): Observable<any> {

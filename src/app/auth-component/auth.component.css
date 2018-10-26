@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-card {
+    padding: 16px 32px;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+mat-hint {
+    color: #f44336 !important;
+}

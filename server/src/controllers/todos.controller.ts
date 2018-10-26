@@ -56,7 +56,7 @@ export class TodosCtrl {
         if (req.user) {
             todo.user = req.user.username;
         }
-        if (req.body.order) {
+        if (req.body.order !== undefined) {
             todo.order = req.body.order;
         }
         todo.save((error: Error, savedTodo: TodoModel) => {

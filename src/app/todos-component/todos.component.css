@@ -4,7 +4,8 @@ h1 {
 
 .flex-container {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-flow: column;
 }
 
 .info , .del{
