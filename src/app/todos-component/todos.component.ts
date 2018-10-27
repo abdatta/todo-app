@@ -43,15 +43,17 @@ export class TodosComponent implements OnInit {
   }
 
   addItem(title: string) {
-    const newTodo: Todo = {
-      title: title,
-      completed: false,
-      order: this.items.length > 0 ? (this.items[this.items.length - 1].order + 64) : 0
-    };
-    this.items.push(newTodo);
-    this.all = false;
-    this.todosService.addTodo(newTodo)
-      .subscribe(todo => newTodo._id = todo._id);
+    if (title) {
+      const newTodo: Todo = {
+        title: title,
+        completed: false,
+        order: this.items.length > 0 ? (this.items[this.items.length - 1].order + 64) : 0
+      };
+      this.items.push(newTodo);
+      this.all = false;
+      this.todosService.addTodo(newTodo)
+        .subscribe(todo => newTodo._id = todo._id);
+    }
   }
 
   deleteCompleted() {
@@ -63,7 +65,7 @@ export class TodosComponent implements OnInit {
 
   delItem(i: number) {
     this.todosService.deleteOneTodo(this.items[i]._id)
-      .subscribe(c => null, error => null);
+      .subscribe(c => null);
     this.items.splice(i, 1);
   }
 

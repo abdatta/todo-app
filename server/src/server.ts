@@ -159,6 +159,7 @@ export class Server {
 
     // Public Routes
     this.app.use('/', express.static(path.join(__dirname, '../public')));
+    this.app.use('*', express.static(path.join(__dirname, '../public/index.html')));
 
   }
 

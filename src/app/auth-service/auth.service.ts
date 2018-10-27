@@ -52,7 +52,7 @@ export class AuthService {
       );
   }
 
-  logout(): void {console.log('logging out...');
+  logout(): void {
     this.currentUser = Promise.resolve(null);
     // To execute observable, it is converted to a promise
     this.http.post('/api/accounts/logout', {})

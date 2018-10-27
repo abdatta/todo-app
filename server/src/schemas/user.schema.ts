@@ -1,5 +1,5 @@
 import { Schema, HookNextFunction, SchemaType, SchemaTypes } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 
 export let UserSchema: Schema = new Schema({
     username: {type: String, default: '', required: true, unique: true},

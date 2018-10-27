@@ -1,14 +1,16 @@
-h1 {
-    text-align: center;
-}
-
 .container {
     display: flex;
     justify-content: center;
 }
 
 .mat-card {
-    padding: 16px 32px;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+}
+
+.mat-tab-group {
+    padding: 16px 24px;
 }
 
 .submit {

@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+h1.mat-display-1 {
+    text-align: center;
+    margin: 22px 0;
+}
+
 .mat-list-item-content {
     display: flex;
     flex-direction: row;
