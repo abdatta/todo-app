@@ -6,12 +6,6 @@ import { NextFunction } from 'connect';
 export class TodosCtrl {
 
     private todoModel: Model<TodoModel>;
-    private todos: {
-        completed: boolean,
-        url: string
-    }[];
-
-    private todomap: any;
 
     /**
      * Constructor
@@ -21,8 +15,6 @@ export class TodosCtrl {
      */
     constructor(model: Model<TodoModel>) {
         this.todoModel = model;
-        this.todos = [];
-        this.todomap = {};
     }
 
     private URLize(todo: TodoModel) {
@@ -57,7 +49,7 @@ export class TodosCtrl {
         if (req.user) {
             todo.user = req.user.username;
         }
-        if (req.body.order !== undefined) {
+        if (req.body.order) {
             todo.order = req.body.order;
         }
         todo.save((error: Error, savedTodo: TodoModel) => {
@@ -124,7 +116,7 @@ export class TodosCtrl {
                 if (req.body.title) {
                     todo.title = req.body.title;
                 }
-                if (req.body.order) {
+                if (req.body.order !== undefined) {
                     todo.order = req.body.order;
                 }
                 if (req.body.completed !== undefined) {

@@ -3,6 +3,6 @@ import { Schema } from 'mongoose';
 export let TodoSchema: Schema = new Schema({
     user: {type: String},
     title: {type: String, required: true},
-    order: {type: Number },
+    order: {type: Number, default: 0 },
     completed: {type: Boolean, default: false}
 });

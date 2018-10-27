@@ -20,6 +20,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - Run `npm run build` to build the entire project. The build artifacts of both the frontend and the backend will be stored in the `dist/` directory.
 - After this, simply run `node index.js` inside the `dist/` directory to run the built app.
+- Navigate to `http://localhost:8000/`.
 
 ## Running unit tests
 
