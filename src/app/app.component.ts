@@ -38,27 +38,30 @@ export class AppComponent implements OnInit {
   }
 
   addItem(title: string) {
-    const newTodo: Todo = {
-      title: title,
-      completed: false,
-      order: this.items.length > 0 ? (this.items[this.items.length - 1].order + 64) : 0
-    };
-    this.items.push(newTodo);
-    this.all = false;
-    this.todosService.addTodo(newTodo)
-      .subscribe(todo => newTodo._id = todo._id);
+    if (title) {
+      const newTodo: Todo = {
+        title: title,
+        completed: false,
+        order: this.items.length > 0 ? (this.items[this.items.length - 1].order + 64) : 0
+      };
+      this.items.push(newTodo);
+      this.all = false;
+      this.todosService.addTodo(newTodo)
+        .subscribe(todo => newTodo._id = todo._id);
+    }
   }
 
   deleteCompleted() {
     const comp = this.items.filter(item => item.completed);
     this.items = this.getItemsLeft();
     comp.forEach(item => this.todosService.deleteOneTodo(item._id)
-        .subscribe(c => null, error => null));
+        .subscribe(c => null));
+    this.all = false;
   }
 
   delItem(i: number) {
     this.todosService.deleteOneTodo(this.items[i]._id)
-      .subscribe(c => null, error => null);
+      .subscribe(c => null);
     this.items.splice(i, 1);
   }
 

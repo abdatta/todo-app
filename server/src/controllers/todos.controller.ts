@@ -110,7 +110,7 @@ export class TodosCtrl {
                 if (req.body.title) {
                     todo.title = req.body.title;
                 }
-                if (req.body.order) {
+                if (req.body.order !== undefined) {
                     todo.order = req.body.order;
                 }
                 if (req.body.completed !== undefined) {
