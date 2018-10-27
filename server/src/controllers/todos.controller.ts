@@ -5,12 +5,6 @@ import { TodoModel } from '../models/todo.model';
 export class TodosCtrl {
 
     private todoModel: Model<TodoModel>;
-    private todos: {
-        completed: boolean,
-        url: string
-    }[];
-
-    private todomap: any;
 
     /**
      * Constructor
@@ -20,8 +14,6 @@ export class TodosCtrl {
      */
     constructor(model: Model<TodoModel>) {
         this.todoModel = model;
-        this.todos = [];
-        this.todomap = {};
     }
 
     private URLize(todo: TodoModel) {

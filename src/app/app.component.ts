@@ -83,7 +83,13 @@ export class AppComponent implements OnInit {
 
   reTitle(i: number) {
     this.edit = -1;
-    this.updateItem(this.items[i]);
+    const item = this.items[i];
+    if (item.title) {
+      this.updateItem(item);
+    } else {
+      this.todosService.getOneTodo(item._id)
+        .subscribe(todo => item.title = todo.title);
+    }
   }
 
   drop(event: any) {
