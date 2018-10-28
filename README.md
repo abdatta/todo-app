@@ -1,4 +1,4 @@
-# TodoAffable
+# TodoApp using Angular 7 and Node.js
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
